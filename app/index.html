@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alarping</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header id="titlebar">
+  <div class="brand"><img src="logo.png" alt=""><span>Alarping</span></div>
+  <div class="tb-group">
+    <button class="spawn" data-model="fable" title="Ctrl+1"><i></i>Fable</button>
+    <button class="spawn" data-model="opus" title="Ctrl+2"><i></i>Opus</button>
+    <button class="spawn" data-model="sonnet" title="Ctrl+3"><i></i>Sonnet</button>
+    <button class="spawn" data-model="haiku" title="Ctrl+4"><i></i>Haiku</button>
+    <button id="btn-new" class="primary" title="Ctrl+N">＋ Novo agente…</button>
+  </div>
+  <div class="tb-group right">
+    <button id="btn-pause" title="Espaço">⏸ Pausar tudo</button>
+    <label class="speed" title="Velocidade da simulação">⚡<select id="speed">
+      <option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option><option value="3">3×</option>
+    </select></label>
+    <button id="btn-kill" title="Fechar todos os agentes">🗑</button>
+    <button id="btn-fs" title="F11">⛶</button>
+    <button id="btn-saver" title="F10 — tela cheia, sem barras, tela sempre acesa">◉ Modo protetor</button>
+    <button id="btn-window" class="primary" title="Ctrl+Shift+N — abre outra janela do Alarping para arrastar para outro monitor">🗗 Nova janela</button>
+  </div>
+</header>
+
+<main id="grid"></main>
+
+<section id="empty">
+  <div class="ascii"><b>✻</b> nenhum agente rodando<small>o silêncio é ensurdecedor</small></div>
+  <p>Lance agentes e finja que você está orquestrando uma frota.</p>
+  <div class="empty-btns">
+    <button class="spawn big" data-model="fable"><i></i>Fable 5.2<small>Mythos · pensa fundo</small></button>
+    <button class="spawn big" data-model="opus"><i></i>Opus 5.5<small>o veterano</small></button>
+    <button class="spawn big" data-model="sonnet"><i></i>Sonnet 5.5<small>equilibrado</small></button>
+    <button class="spawn big" data-model="haiku"><i></i>Haiku 5.5<small>rápido demais</small></button>
+  </div>
+  <p class="keys"><kbd>Ctrl</kbd>+<kbd>N</kbd> novo · <kbd>Ctrl</kbd>+<kbd>1–4</kbd> lançar rápido · <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> nova janela · <kbd>Espaço</kbd> pausar · <kbd>F10</kbd> modo protetor · <kbd>Esc</kbd> interromper</p>
+</section>
+
+<footer id="statusbar">
+  <span id="sb-agents">0 agentes</span>
+  <span id="sb-windows" hidden></span>
+  <span id="sb-tokens"></span>
+  <span class="grow"></span>
+  <span class="dim">Ctrl+N novo · Ctrl+Shift+N nova janela · Ctrl+W fechar · Esc interromper · F10 protetor</span>
+  <span id="sb-clock"></span>
+</footer>
+
+<div id="modal" hidden>
+  <form id="new-form">
+    <h2>Novo agente</h2>
+    <div class="models">
+      <label><input type="radio" name="model" value="fable"><span data-model="fable"><i></i><b>Fable 5.2</b><small>Mythos · lento e profundo · subagentes</small></span></label>
+      <label><input type="radio" name="model" value="opus" checked><span data-model="opus"><i></i><b>Opus 5.5</b><small>raciocínio forte · subagentes</small></span></label>
+      <label><input type="radio" name="model" value="sonnet"><span data-model="sonnet"><i></i><b>Sonnet 5.5</b><small>equilíbrio velocidade/qualidade</small></span></label>
+      <label><input type="radio" name="model" value="haiku"><span data-model="haiku"><i></i><b>Haiku 5.5</b><small>dispara ferramentas sem parar</small></span></label>
+    </div>
+    <div class="row">
+      <label>Projeto<select name="project" id="f-project"></select></label>
+      <label>Ou um nome inventado<input name="custom" placeholder="ex.: skynet-backend" autocomplete="off"></label>
+    </div>
+    <label>Primeira tarefa (opcional)<input name="task" placeholder="vazio = o agente inventa uma" autocomplete="off"></label>
+    <div class="row">
+      <label>Modo<select name="mode">
+        <option value="accept">⏵⏵ accept edits</option>
+        <option value="default">pedir permissões</option>
+        <option value="plan">⏸ plan mode</option>
+      </select></label>
+      <label>Quantidade<input type="number" name="count" min="1" max="8" value="1"></label>
+    </div>
+    <div class="actions">
+      <button type="button" id="btn-cancel">Cancelar</button>
+      <button type="submit" class="primary">Lançar ⏎</button>
+    </div>
+  </form>
+</div>
+
+<script src="scenarios.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
